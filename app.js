@@ -7,6 +7,18 @@ connectDatabase()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+const session =  require("express-session")
+const cookieparser =  require("cookie-parser")
+
+app.use(cookieparser({
+     resave:true,
+     saveUninitialized:true,
+     secret:process.env.SESSION_SECRET
+}
+))
+
+app.use(cookieparser())
+
 
 const ErorrHandelr = require('./utils/ErrorHandler')
 const { genetatedErrors } = require('./Middlewares/error')
